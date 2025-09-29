@@ -35,6 +35,8 @@ export default defineConfig({
 
     workers: process.env.CI ? 1 : undefined,
 
+    fullyParallel: true,
+
     webServer: {
         command: 'cd ../../ && npx http-server -p 9999 ./storybook-static',
         url: BASE_URL,

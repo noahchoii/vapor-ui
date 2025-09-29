@@ -48,7 +48,7 @@ visualStories.forEach((story) => {
     test(story.id, async ({ page }, meta) => {
         await navigate(page, BASE_URL, meta.title);
 
-        const screenshotName = meta.snapshotPath().split('/').pop();
+        const screenshotName = meta.snapshotPath().split('/').pop()?.replace('.txt', '');
         const screenshotPath = path.resolve(screenshotDir, `${screenshotName}.png`);
 
         await page.screenshot({ path: screenshotPath, type: 'png' });
