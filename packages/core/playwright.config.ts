@@ -11,13 +11,13 @@ export default defineConfig({
     reporter: [
         ['html', { outputFolder: './__tests__/report' }],
         ['json', { outputFile: './__tests__/report/index.json' }],
-        [
-            '@argos-ci/playwright/reporter',
-            createArgosReporterOptions({
-                uploadToArgos: !!process.env.CI,
-                token: process.env.ARGOS_TOKEN,
-            }),
-        ],
+        // [
+        //     '@argos-ci/playwright/reporter',
+        //     createArgosReporterOptions({
+        //         uploadToArgos: !!process.env.CI,
+        //         token: process.env.ARGOS_TOKEN,
+        //     }),
+        // ],
     ],
     use: { baseURL: BASE_URL, trace: 'on' },
     projects: [
