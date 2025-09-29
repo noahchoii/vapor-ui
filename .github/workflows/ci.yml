@@ -28,6 +28,10 @@ jobs:
                   fetch-depth: 0
             - name: Install Dependencies
               uses: ./.github/composite/install
+            - name: Build Icons
+              run: pnpm icons build
+            - name: Build Storybook
+              run: pnpm build-storybook
             - name: Run Playwright tests
               run: pnpm core exec playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
             - name: Upload Snapshots
