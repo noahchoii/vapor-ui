@@ -1,0 +1,33 @@
+name: Visual Regression Test
+
+on:
+    workflow_dispatch:
+    pull_request:
+        types:
+            - opened
+            - synchronize
+        paths:
+            - packages/core/**
+
+env:
+    BUCKET_NAME: ${{ secrets.ARGOS_TOKEN }}
+
+jobs:
+    test_regressions:
+        timeout-minutes: 60
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                shardIndex: [1, 2, 3, 4]
+                shardTotal: [4]
+        container:
+            image: mcr.microsoft.com/playwright:v1.55.0-noble
+            options: --user 1001
+        steps:
+            - name: Install Dependencies
+              uses: ./.github/composite/install
+            - name: Run Playwright tests
+              run: pnpm core exec playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+            - name: Upload Snapshots
+              run: pnpm core exec -- argos upload ./__tests__/screenshots --token=""

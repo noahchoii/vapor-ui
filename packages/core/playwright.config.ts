@@ -33,7 +33,7 @@ export default defineConfig({
         },
     ],
 
-    workers: 1,
+    workers: process.env.CI ? 1 : undefined,
 
     webServer: {
         command: 'cd ../../ && npx http-server -p 9999 ./storybook-static',

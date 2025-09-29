@@ -72,6 +72,7 @@
         "rainbow-sprinkles": "^1.0.0"
     },
     "devDependencies": {
+        "@argos-ci/cli": "^3.0.10",
         "@argos-ci/playwright": "^6.1.7",
         "@playwright/test": "^1.55.0",
         "@repo/eslint-config": "workspace:*",
