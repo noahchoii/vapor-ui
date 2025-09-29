@@ -9,9 +9,6 @@ on:
         paths:
             - packages/core/**
 
-env:
-    BUCKET_NAME: ${{ secrets.ARGOS_TOKEN }}
-
 jobs:
     test_regressions:
         timeout-minutes: 60
@@ -30,4 +27,4 @@ jobs:
             - name: Run Playwright tests
               run: pnpm core exec playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
             - name: Upload Snapshots
-              run: pnpm core exec -- argos upload ./__tests__/screenshots --token=""
+              run: pnpm core exec -- argos upload ./__tests__/screenshots --token=${{ secrets.ARGOS_TOKEN }}
