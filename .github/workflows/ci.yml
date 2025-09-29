@@ -13,11 +13,11 @@ jobs:
     test_regressions:
         timeout-minutes: 60
         runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                shardIndex: [1, 2, 3, 4]
-                shardTotal: [4]
+        # strategy:
+        #     fail-fast: false
+        #     matrix:
+        #         shardIndex: [1, 2, 3, 4]
+        #         shardTotal: [4]
         container:
             image: mcr.microsoft.com/playwright:v1.55.0-noble
             options: --user 1001
@@ -33,6 +33,7 @@ jobs:
             - name: Build Storybook
               run: pnpm build-storybook
             - name: Run Playwright tests
-              run: pnpm core exec playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+              #   run: pnpm core exec playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+              run: pnpm core exec playwright test
             - name: Upload Snapshots
               run: pnpm core exec -- argos upload ./__tests__/screenshots --token=${{ secrets.ARGOS_TOKEN }}
