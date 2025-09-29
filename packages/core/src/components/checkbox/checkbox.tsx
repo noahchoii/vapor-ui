@@ -68,7 +68,6 @@ interface CheckboxIndicatorProps extends IndicatorPrimitiveProps {}
 const Indicator = forwardRef<HTMLDivElement, CheckboxIndicatorProps>(
     ({ className, ...props }, ref) => {
         const { size, indeterminate } = useCheckboxContext();
-        const IconElement = indeterminate ? DashIcon : CheckIcon;
 
         return (
             <BaseCheckbox.Indicator
@@ -76,7 +75,7 @@ const Indicator = forwardRef<HTMLDivElement, CheckboxIndicatorProps>(
                 className={clsx(styles.indicator({ size }), className)}
                 {...props}
             >
-                <IconElement width="100%" height="100%" />
+                {indeterminate ? <DashIcon /> : <CheckIcon />}
             </BaseCheckbox.Indicator>
         );
     },

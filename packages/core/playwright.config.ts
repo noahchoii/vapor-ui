@@ -1,4 +1,3 @@
-import { createArgosReporterOptions } from '@argos-ci/playwright/reporter';
 import { defineConfig, devices } from '@playwright/test';
 
 const BASE_URL = 'http://localhost:9999';
@@ -11,13 +10,6 @@ export default defineConfig({
     reporter: [
         ['html', { outputFolder: './__tests__/report' }],
         ['json', { outputFile: './__tests__/report/index.json' }],
-        // [
-        //     '@argos-ci/playwright/reporter',
-        //     createArgosReporterOptions({
-        //         uploadToArgos: !!process.env.CI,
-        //         token: process.env.ARGOS_TOKEN,
-        //     }),
-        // ],
     ],
     use: { baseURL: BASE_URL, trace: 'on' },
     projects: [
