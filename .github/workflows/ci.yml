@@ -22,6 +22,10 @@ jobs:
             image: mcr.microsoft.com/playwright:v1.55.0-noble
             options: --user 1001
         steps:
+            - name: Git clone the repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
             - name: Install Dependencies
               uses: ./.github/composite/install
             - name: Run Playwright tests
