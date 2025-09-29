@@ -15,17 +15,13 @@ export default defineConfig({
     projects: [
         { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
         { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-        {
-            name: 'chromium',
-            use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-        },
-        {
-            name: 'Microsoft Edge',
-            use: { ...devices['Desktop Edge'], channel: 'msedge' },
-        },
+        { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+        { name: 'Microsoft Edge', use: { ...devices['Desktop Edge'] } },
     ],
 
-    workers: 1,
+    workers: process.env.CI ? 1 : undefined,
+
+    fullyParallel: true,
 
     webServer: {
         command: 'cd ../../ && npx http-server -p 9999 ./storybook-static',

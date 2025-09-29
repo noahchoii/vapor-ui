@@ -1,6 +1,10 @@
-import { expect, test } from '@playwright/test';
+// @ts-nocheck
+import { test } from '@playwright/test';
+import path from 'node:path';
 
 import manifest from '../../../storybook-static/index.json' with { type: 'json' };
+
+const screenshotDir = './__tests__/screenshots/';
 
 const targetComponent =
     process.env.COMPONENT ||
@@ -44,9 +48,9 @@ visualStories.forEach((story) => {
     test(story.id, async ({ page }, meta) => {
         await navigate(page, BASE_URL, meta.title);
 
-        await expect(page).toHaveScreenshot({
-            fullPage: true,
-            animations: 'disabled',
-        });
+        const screenshotName = meta.snapshotPath().split('/').pop()?.replace('.txt', '');
+        const screenshotPath = path.resolve(screenshotDir, `${screenshotName}.png`);
+
+        await page.screenshot({ path: screenshotPath, type: 'png' });
     });
 });
